@@ -48,11 +48,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   width: 80,
                                   color: Colors.red,
                                 )
-                              : Image.network(
-                                  data.urlToImage,
-                                  fit: BoxFit.cover,
-                                  height: 80,
-                                  width: 80,
+                              : Hero(
+                                  tag: data.urlToImage,
+                                  child: Image.network(
+                                    data.urlToImage,
+                                    fit: BoxFit.cover,
+                                    height: 80,
+                                    width: 80,
+                                  ),
                                 ),
                           title: Text(
                             data.title,
