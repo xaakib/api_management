@@ -1,4 +1,5 @@
 import 'package:api_management/models/model.dart';
+import 'package:api_management/screens/details_screen.dart';
 import 'package:api_management/services/article_service.dart';
 import 'package:flutter/material.dart';
 
@@ -16,31 +17,59 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text("NewsApp"),
       ),
-      body: FutureBuilder<News>(
-          future: apiServices.getNews(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              List<Article> list = snapshot.data.articles;
+      body: ListView(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height,
+            child: FutureBuilder<News>(
+                future: apiServices.getNews(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<Article> list = snapshot.data.articles;
 
-              return ListView.builder(
-                itemCount: list.length,
-                itemBuilder: (context, index) {
-                  Article data = list[index];
-                  return ListTile(
-                    leading: Image.network(data.urlToImage),
-                    title: Text(
-                      data.title,
-                    ),
-                    subtitle: Text(
-                      data.description,
-                    ),
-                  );
-                },
-              );
-            } else {
-              return CircularProgressIndicator();
-            }
-          }),
+                    return ListView.builder(
+                      itemCount: list.length,
+                      itemBuilder: (context, index) {
+                        Article data = list[index];
+                        String imageLoad = data.urlToImage;
+
+                        return ListTile(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailsScreen(
+                                          article: data,
+                                        )));
+                          },
+                          leading: imageLoad == null
+                              ? Container(
+                                  height: 80,
+                                  width: 80,
+                                  color: Colors.red,
+                                )
+                              : Image.network(
+                                  data.urlToImage,
+                                  fit: BoxFit.cover,
+                                  height: 80,
+                                  width: 80,
+                                ),
+                          title: Text(
+                            data.title,
+                          ),
+                          subtitle: Text(
+                            data.description,
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                }),
+          ),
+        ],
+      ),
     );
   }
 }
