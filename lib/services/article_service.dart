@@ -13,6 +13,7 @@ class ApiServices {
     if (response.statusCode == 200) {
       var jsonResponse = response.body;
       News res = News.fromJson(json.decode(jsonResponse));
+      print(res.status);
       return res;
     }
   }
@@ -22,6 +23,7 @@ class ApiServices {
     if (response.statusCode == 200) {
       var jsonResponse = response.body;
       SourceNews res = SourceNews.fromJson(json.decode(jsonResponse));
+
       return res;
     } else {
       print("No data");

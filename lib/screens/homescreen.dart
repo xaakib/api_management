@@ -29,12 +29,35 @@ class _HomeScreenState extends State<HomeScreen> {
                     List<Sources> list = snapshot.data.sources;
 
                     return ListView.builder(
+                      scrollDirection: Axis.horizontal,
                       itemCount: list.length,
                       itemBuilder: (context, index) {
-                        Sources data = list[index];
+                        Sources sources = list[index];
 
-                        return ListTile(
-                          title: Text(data.name),
+                        return Center(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  height: 120,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: Colors.red,
+                                  ),
+                                  child: Center(
+                                      child: Text(
+                                    sources.name,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )),
+                                ),
+                              ),
+                            ],
+                          ),
                         );
                       },
                     );
