@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView(
         children: [
           Container(
-            height: 300,
+            height: 150,
             child: FutureBuilder<SourceNews>(
                 future: apiServices.getSource(),
                 builder: (context, snapshot) {
