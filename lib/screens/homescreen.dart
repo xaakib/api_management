@@ -21,6 +21,29 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView(
         children: [
           Container(
+            height: 300,
+            child: FutureBuilder<SourceNews>(
+                future: apiServices.getSource(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<Sources> list = snapshot.data.sources;
+
+                    return ListView.builder(
+                      itemCount: list.length,
+                      itemBuilder: (context, index) {
+                        Sources data = list[index];
+
+                        return ListTile(
+                          title: Text(data.name),
+                        );
+                      },
+                    );
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                }),
+          ),
+          Container(
             height: MediaQuery.of(context).size.height,
             child: FutureBuilder<News>(
                 future: apiServices.getNews(),

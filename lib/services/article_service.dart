@@ -5,7 +5,7 @@ import 'dart:convert';
 
 class ApiServices {
   String sourcUrl =
-      " https://newsapi.org/v2/sources?apiKey=c5d0829c93794ce3a717ad6f55787aaa";
+      "https://newsapi.org/v2/sources?apiKey=c5d0829c93794ce3a717ad6f55787aaa";
   String url =
       "https://newsapi.org/v2/top-headlines?country=in&apiKey=c5d0829c93794ce3a717ad6f55787aaa";
   Future<News> getNews() async {
@@ -17,12 +17,11 @@ class ApiServices {
     }
   }
 
-  Future<Sources> getSource() async {
-    var response = await http.get(url);
+  Future<SourceNews> getSource() async {
+    var response = await http.get(sourcUrl);
     if (response.statusCode == 200) {
       var jsonResponse = response.body;
-      Sources res = Sources.fromJson(json.decode(jsonResponse));
-      print(res);
+      SourceNews res = SourceNews.fromJson(json.decode(jsonResponse));
       return res;
     } else {
       print("No data");

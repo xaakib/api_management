@@ -1,6 +1,3 @@
-
-
-
 class News {
   News({
     this.status,
