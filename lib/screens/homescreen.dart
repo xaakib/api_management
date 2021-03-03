@@ -14,7 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("ApiManage"),
+        title: Text("NewsApp"),
       ),
       body: FutureBuilder<News>(
           future: apiServices.getNews(),
@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (context, index) {
                   Article data = list[index];
                   return ListTile(
+                    leading: Image.network(data.urlToImage),
                     title: Text(
                       data.title,
                     ),
