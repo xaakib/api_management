@@ -1,4 +1,5 @@
 import 'package:api_management/models/model.dart';
+import 'package:api_management/models/source.dart';
 import 'package:api_management/screens/details_screen.dart';
 import 'package:api_management/services/article_service.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemCount: list.length,
                       itemBuilder: (context, index) {
                         Article data = list[index];
-                        String imageLoad = data.urlToImage;
 
                         return ListTile(
                           onTap: () {
@@ -42,12 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           article: data,
                                         )));
                           },
-                          leading: imageLoad == null
-                              ? Container(
-                                  height: 80,
-                                  width: 80,
-                                  color: Colors.red,
-                                )
+                          leading: data.urlToImage == null
+                              ? Text("No Image")
                               : Hero(
                                   tag: data.urlToImage,
                                   child: Image.network(
@@ -57,12 +53,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                     width: 80,
                                   ),
                                 ),
-                          title: Text(
-                            data.title,
-                          ),
-                          subtitle: Text(
-                            data.description,
-                          ),
+                          title: data.title == null
+                              ? Text("SSSSSSS")
+                              : Text(
+                                  data.title,
+                                ),
+                          subtitle: data.description == null
+                              ? Text("XXXXXXX")
+                              : Text(
+                                  data.description,
+                                ),
                         );
                       },
                     );
