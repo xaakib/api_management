@@ -2,13 +2,14 @@ import 'package:api_management/models/model.dart';
 import 'package:api_management/services/article_service.dart';
 import 'package:flutter/material.dart';
 
-class ApiManage extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  _ApiManageState createState() => _ApiManageState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _ApiManageState extends State<ApiManage> {
-  ApiServices _apiServices = ApiServices();
+class _HomeScreenState extends State<HomeScreen> {
+  ApiServices apiServices = ApiServices();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +17,7 @@ class _ApiManageState extends State<ApiManage> {
         title: Text("ApiManage"),
       ),
       body: FutureBuilder<News>(
-          future: _apiServices.getNews(),
+          future: apiServices.getNews(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               List<Article> list = snapshot.data.articles;
