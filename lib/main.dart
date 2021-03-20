@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'screens/homescreen.dart';
+import 'screens/test_screeen.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,7 +14,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomeScreen(),
+      home: TestScreen(),
     );
   }
 }
